@@ -7,29 +7,32 @@ import {
 import Navbar from './components/Navbar';
 import About from './components/About';
 import Home from './components/Home';
+import NoteState from './context/notes/NoteState';
 function App() {
   return (
     <>
-      <Router>
-        <Navbar />
+      <NoteState>
+        <Router>
+          <Navbar />
 
 
-        <Routes>
-          <Route
-            exact
-            path="/home"
-            element={<Home />}
-          />
+          <Routes>
+            <Route
+              exact
+              path="/home"
+              element={<Home />}
+            />
 
 
-          <Route
-            exact
-            path="/about"
-            element={<About />}
-          />
+            <Route
+              exact
+              path="/about"
+              element={<About />}
+            />
 
-        </Routes>
-      </Router>
+          </Routes>
+        </Router>
+      </NoteState>
     </>
   );
 }
