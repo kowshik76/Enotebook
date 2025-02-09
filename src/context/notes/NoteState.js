@@ -12,7 +12,35 @@ const NoteState = (props) => {
             "tag": "personal",
             "date": "2025-02-04T05:58:09.823Z",
             "__v": 0
-        }
+        },
+        {
+            "_id": "67a1ac71b2346a7602e65eff",
+            "user": "679fa48b80d42fac0997754e",
+            "title": "Make Less in MOre",
+            "description": "NO time for chill,just make it in nill",
+            "tag": "personal",
+            "date": "2025-02-04T05:58:09.823Z",
+            "__v": 0
+        },
+        {
+            "_id": "67a1ac71b2346a7602e65eff",
+            "user": "679fa48b80d42fac0997754e",
+            "title": "Make Less in MOre",
+            "description": "NO time for chill,just make it in nill",
+            "tag": "personal",
+            "date": "2025-02-04T05:58:09.823Z",
+            "__v": 0
+        },
+        {
+            "_id": "67a1ac71b2346a7602e65eff",
+            "user": "679fa48b80d42fac0997754e",
+            "title": "Make Less in MOre",
+            "description": "NO time for chill,just make it in nill",
+            "tag": "personal",
+            "date": "2025-02-04T05:58:09.823Z",
+            "__v": 0
+        },
+
 
     ]
     const [notes, setNotes] = useState(NotesInitial)
