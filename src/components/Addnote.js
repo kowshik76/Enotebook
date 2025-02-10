@@ -16,11 +16,11 @@ export const Addnote = () => {
     return (
         <div> <h1>Notes</h1>
             <div className="mb-3">
-                <label htmlfor="title" className="form-label">Title</label>
+                <label htmlFor="title" className="form-label">Title</label>
                 <input type="text" className="form-control" id="title" name="title" placeholder="Type Something" onChange={onChange} />
             </div>
             <div className="mb-3">
-                <label htmlfor="description" className="form-label">Description</label>
+                <label htmlFor="description" className="form-label">Description</label>
                 <textarea className="form-control" id="description" name="description" rows="3" onChange={onChange}></textarea>
                 <div className="my-3">
                     <button type="button" className="btn btn-outline-danger" onClick={handleclick}>Save</button>
