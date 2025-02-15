@@ -30,8 +30,13 @@ export const Addnote = () => {
             <div className="mb-3">
                 <label htmlFor="description" className="form-label">Description</label>
                 <textarea className="form-control" id="description" name="description" rows="3" value={note.description} onChange={onChange}></textarea>
-                <div className="my-3">
-                    <button type="button" className="btn btn-outline-danger" onClick={handleclick}>Save</button>
+
+                <div className="mb-3">
+                    <label htmlFor="tag" className="form-label">Tag</label>
+                    <textarea className="form-control" id="tag" name="tag" rows="3" value={note.tag} onChange={onChange}></textarea>
+                    <div className="my-3">
+                        <button type="button" className="btn btn-outline-danger" onClick={handleclick}>Save</button>
+                    </div>
                 </div>
             </div>
         </div>
