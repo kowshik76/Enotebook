@@ -4,7 +4,7 @@ import NoteContext from '../context/notes/NoteContext';
 export const Addnote = () => {
     const context = useContext(NoteContext);
     const { addnote } = context;
-    const [note, setnote] = useState({ title: "", description: "", tag: "default" });
+    const [note, setnote] = useState({ title: "", description: "", tag: "" });
 
     const handleclick = (e) => {
         e.preventDefault();
@@ -13,7 +13,7 @@ export const Addnote = () => {
             return;
         }
         addnote(note.title, note.description, note.tag);
-        setnote({ title: "", description: "", tag: "default" });
+        setnote({ title: "", description: "", tag: "" });
     };
 
     const onChange = (e) => {
@@ -33,7 +33,7 @@ export const Addnote = () => {
 
                 <div className="mb-3">
                     <label htmlFor="tag" className="form-label">Tag</label>
-                    <textarea className="form-control" id="tag" name="tag" rows="3" value={note.tag} onChange={onChange}></textarea>
+                    <textarea className="form-control" id="tag" name="tag" placeholder="Type Something" rows="1" value={note.tag} onChange={onChange}></textarea>
                     <div className="my-3">
                         <button type="button" className="btn btn-outline-danger" onClick={handleclick}>Save</button>
                     </div>
