@@ -35,7 +35,7 @@ export const Addnote = () => {
                     <label htmlFor="tag" className="form-label">Tag</label>
                     <textarea className="form-control" id="tag" name="tag" placeholder="Type Something" rows="1" value={note.tag} onChange={onChange}></textarea>
                     <div className="my-3">
-                        <button type="button" className="btn btn-outline-danger" onClick={handleclick}>Save</button>
+                        <button disabled={note.title.length === 0 || note.description.length === 0 || note.tag.length === 0} type="button" className="btn btn-outline-primary" onClick={handleclick}>Save</button>
                     </div>
                 </div>
             </div>

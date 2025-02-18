@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import NoteContext from './NoteContext';
 
 const NoteState = (props) => {
-    const authtoken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjdhYzZlZDM1MzE3OTU0MTUyMmEyMTA2In0sImlhdCI6MTczOTY5MTk5NiwiZXhwIjoxNzM5Njk1NTk2fQ.zmtToM1tshYdJjiREk3AJtk1L8UnShAbG1E6mrneb-Y";
+    const authtoken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjdhYzZlZDM1MzE3OTU0MTUyMmEyMTA2In0sImlhdCI6MTczOTg5NzAzMCwiZXhwIjoxNzM5OTAwNjMwfQ.2o6akN9M_jPzcuEM8cJkVahVgLM3w1ijk5DgIcYMJhE";
     const host = "http://localhost:3000";
     const [notes, setNotes] = useState([]);
 

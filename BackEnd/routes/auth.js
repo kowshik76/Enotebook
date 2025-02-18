@@ -68,20 +68,22 @@ router.post('/login', [
     try {
         let user = await User.findOne({ mail });
         if (!user) {
+            let success = false;
             return res.status(400).json({ error: "Invalid email or password!" });
         }
 
         // Compare password
         const passwordMatch = await bcrypt.compare(password, user.password);
         if (!passwordMatch) {
-            return res.status(400).json({ error: "Invalid email or password!" });
+            success = false;
+            return res.status(400).json({ success, error: "Invalid email or password!" });
         }
 
         // Generate JWT token
         const data = { user: { id: user._id } };
         const authToken = jwt.sign(data, JWT_SECRET, { expiresIn: "1h" });
-
-        return res.status(200).json({ authToken });
+        success = true;
+        return res.status(200).json({ success, authToken });
 
     } catch (error) {
         console.error("Error logging in:", error.message);

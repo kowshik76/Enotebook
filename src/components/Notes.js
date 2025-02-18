@@ -89,6 +89,10 @@ export const Notes = () => {
             <div>
                 <div className="row my-3">
                     <h3>Your Notes</h3>
+                    <div className="container">
+                        {notes.length === 0 && 'No Notes To Display!!'}
+
+                    </div>
                     {notes.map((note) => {
                         return <Notesitem key={note._id} note={note} updateNote={updateNote} />;
                     })}
