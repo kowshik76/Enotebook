@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import NoteContext from './NoteContext';
 
 const NoteState = (props) => {
-    const authtoken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjdhYzZlZDM1MzE3OTU0MTUyMmEyMTA2In0sImlhdCI6MTczOTg5NzAzMCwiZXhwIjoxNzM5OTAwNjMwfQ.2o6akN9M_jPzcuEM8cJkVahVgLM3w1ijk5DgIcYMJhE";
     const host = "http://localhost:3000";
     const [notes, setNotes] = useState([]);
 
@@ -12,7 +11,7 @@ const NoteState = (props) => {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                "auth-token": `${authtoken}`
+                "auth-token": `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjdhYzZlZDM1MzE3OTU0MTUyMmEyMTA2In0sImlhdCI6MTczOTk3ODM5OSwiZXhwIjoxNzM5OTgxOTk5fQ.BGw_NfTrtGO5JLqqmWOVDaavgRfFQeFOxlWq13bsn8k`
             }
         });
         const json = await response.json();
@@ -25,7 +24,7 @@ const NoteState = (props) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                "auth-token": `${authtoken}`
+                "auth-token": `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjdhYzZlZDM1MzE3OTU0MTUyMmEyMTA2In0sImlhdCI6MTczOTk3ODM5OSwiZXhwIjoxNzM5OTgxOTk5fQ.BGw_NfTrtGO5JLqqmWOVDaavgRfFQeFOxlWq13bsn8k`
             },
             body: JSON.stringify({ title, description, tag })
         });
@@ -39,7 +38,7 @@ const NoteState = (props) => {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
-                "auth-token": `${authtoken}`
+                "auth-token": `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjdhYzZlZDM1MzE3OTU0MTUyMmEyMTA2In0sImlhdCI6MTczOTk3ODM5OSwiZXhwIjoxNzM5OTgxOTk5fQ.BGw_NfTrtGO5JLqqmWOVDaavgRfFQeFOxlWq13bsn8k`
             }
         });
         setNotes(notes.filter(note => note._id !== id));
@@ -51,7 +50,7 @@ const NoteState = (props) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                "auth-token": `${authtoken}`
+                "auth-token": `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjdhYzZlZDM1MzE3OTU0MTUyMmEyMTA2In0sImlhdCI6MTczOTk3ODM5OSwiZXhwIjoxNzM5OTgxOTk5fQ.BGw_NfTrtGO5JLqqmWOVDaavgRfFQeFOxlWq13bsn8k`
             },
             body: JSON.stringify({ title, description, tag })
         });

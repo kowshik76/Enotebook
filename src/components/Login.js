@@ -18,7 +18,7 @@ export const Login = (props) => {
         console.log(json);
         if (json.success) {
             localStorage.getItem('token', json.authToken);
-            navigate("/");
+            navigate("/home");
         } else {
             alert("Wrong Credentials");
         }

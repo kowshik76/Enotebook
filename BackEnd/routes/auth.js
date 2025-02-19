@@ -19,7 +19,8 @@ router.post('/createuser', [
 ], async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+        let success = false;
+        return res.status(400).json({ success, errors: errors.array() });
     }
 
     try {
@@ -28,7 +29,8 @@ router.post('/createuser', [
         // Check if user already exists
         let existingUser = await User.findOne({ mail });
         if (existingUser) {
-            return res.status(409).json({ error: "User already exists, please use another email!" });
+            success = false;
+            return res.status(409).json({ success, error: "User already exists, please use another email!" });
         }
 
         // Hash password
@@ -45,12 +47,13 @@ router.post('/createuser', [
         // Generate JWT token
         const data = { user: { id: newUser._id } };
         const authToken = jwt.sign(data, JWT_SECRET, { expiresIn: "1h" });
-
-        return res.status(201).json({ authToken });
+        success = true;
+        return res.status(201).json({ success, authToken });
 
     } catch (error) {
+        success = false;
         console.error("Error creating user:", error.message);
-        return res.status(500).json({ error: "Internal Server Error" });
+        return res.status(500).json({ success, error: "Internal Server Error" });
     }
 });
 
