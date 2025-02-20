@@ -3,19 +3,31 @@ import NoteContext from './NoteContext';
 
 const NoteState = (props) => {
     const host = "http://localhost:3000";
+    const authToken = localStorage.getItem("token");
     const [notes, setNotes] = useState([]);
 
     // Get all notes
     const getallnotes = async () => {
-        const response = await fetch(`${host}/api/notes/fetchallnotes`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                "auth-token": `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjdhYzZlZDM1MzE3OTU0MTUyMmEyMTA2In0sImlhdCI6MTczOTk3ODM5OSwiZXhwIjoxNzM5OTgxOTk5fQ.BGw_NfTrtGO5JLqqmWOVDaavgRfFQeFOxlWq13bsn8k`
+        try {
+            const response = await fetch(`${host}/api/notes/fetchallnotes`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    "auth-token": authToken || ""
+                }
+            });
+
+            if (!response.ok) {
+                console.error("Error fetching notes:", response.statusText);
+                return;
             }
-        });
-        const json = await response.json();
-        setNotes(json);
+
+            const json = await response.json();
+            setNotes(Array.isArray(json) ? json : []);
+        } catch (error) {
+            console.error("Fetch error:", error);
+            setNotes([]);
+        }
     };
 
     // Add note
@@ -24,10 +36,11 @@ const NoteState = (props) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                "auth-token": `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjdhYzZlZDM1MzE3OTU0MTUyMmEyMTA2In0sImlhdCI6MTczOTk3ODM5OSwiZXhwIjoxNzM5OTgxOTk5fQ.BGw_NfTrtGO5JLqqmWOVDaavgRfFQeFOxlWq13bsn8k`
+                "auth-token": authToken || ""
             },
             body: JSON.stringify({ title, description, tag })
         });
+
         const note = await response.json();
         setNotes([...notes, note]);
     };
@@ -38,9 +51,10 @@ const NoteState = (props) => {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
-                "auth-token": `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjdhYzZlZDM1MzE3OTU0MTUyMmEyMTA2In0sImlhdCI6MTczOTk3ODM5OSwiZXhwIjoxNzM5OTgxOTk5fQ.BGw_NfTrtGO5JLqqmWOVDaavgRfFQeFOxlWq13bsn8k`
+                "auth-token": authToken || ""
             }
         });
+
         setNotes(notes.filter(note => note._id !== id));
     };
 
@@ -50,12 +64,12 @@ const NoteState = (props) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                "auth-token": `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjdhYzZlZDM1MzE3OTU0MTUyMmEyMTA2In0sImlhdCI6MTczOTk3ODM5OSwiZXhwIjoxNzM5OTgxOTk5fQ.BGw_NfTrtGO5JLqqmWOVDaavgRfFQeFOxlWq13bsn8k`
+                "auth-token": authToken || ""
             },
             body: JSON.stringify({ title, description, tag })
         });
-        await response.json();
 
+        await response.json();
         setNotes(notes.map(note => note._id === id ? { ...note, title, description, tag } : note));
     };
 

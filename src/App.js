@@ -8,24 +8,35 @@ import Navbar from './components/Navbar';
 import About from './components/About';
 import Home from './components/Home';
 import NoteState from './context/notes/NoteState';
-import { Alert } from './components/Alert';
+import Alert from './components/Alert';
 import { Signup } from './components/Signup';
 import { Login } from './components/Login';
+import { useState } from 'react';
 function App() {
+  const [alert, setAlert] = useState(null);
+  const ShowAlert = (message, type) => {
+    setAlert({
+      msg: message,
+      type: type,
+    });
+    setTimeout(() => {
+      setAlert(null);
+    }, 1500);
+  };
   return (
     <>
       <NoteState>
         <Router>
 
           <Navbar />
-          <Alert message={"Under Process"} />
+          <Alert alert={alert} />
 
           <div className="container">
             <Routes>
               <Route
                 exact
                 path="/home"
-                element={<Home />}
+                element={<Home ShowAlert={ShowAlert} />}
               />
 
 
@@ -37,12 +48,14 @@ function App() {
               <Route
                 exact
                 path="/login"
-                element={<Login />}
+                element={<Login ShowAlert={ShowAlert} />}
+
               />
               <Route
                 exact
                 path="/signup"
-                element={<Signup />}
+                element={<Signup ShowAlert={ShowAlert} />}
+
               />
 
             </Routes>

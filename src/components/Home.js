@@ -1,12 +1,11 @@
 import React from 'react';
 import { Notes } from './Notes';
-import { Addnote } from './Addnote';
 
-export const Home = () => {
+export const Home = (props) => {
     return (
-        <div>
+        <div className='container my-4'>
 
-            <Notes />
+            <Notes ShowAlert={props.ShowAlert} />
         </div>
     );
 };

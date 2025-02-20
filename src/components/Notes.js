@@ -5,7 +5,7 @@ import NoteContext from '../context/notes/NoteContext';
 
 
 
-export const Notes = () => {
+export const Notes = (props) => {
     const [note, setnote] = useState({ id: "", etitle: "", edescription: "", etag: "" });
 
     const context = useContext(NoteContext);
@@ -32,10 +32,11 @@ export const Notes = () => {
 
     const handleclick = () => {
         if (note.etitle.trim() === "" || note.edescription.trim() === "") {
-            alert("Title and description cannot be empty!");
             return;
         }
         editnote(note.id, note.etitle, note.edescription, note.etag);
+        props.ShowAlert("Note Updated successfully!", "success");
+
         refclose.current.click();
     };
 
@@ -46,7 +47,7 @@ export const Notes = () => {
 
     return (
         <>
-            <Addnote />
+            <Addnote ShowAlert={props.ShowAlert} />
 
             <button type="button" className="btn btn-primary d-none" data-bs-toggle="modal" ref={ref} data-bs-target="#exampleModal">
                 example
@@ -94,7 +95,7 @@ export const Notes = () => {
 
                     </div>
                     {notes.map((note) => {
-                        return <Notesitem key={note._id} note={note} updateNote={updateNote} />;
+                        return <Notesitem key={note._id} note={note} updateNote={updateNote} ShowAlert={props.ShowAlert} />;
                     })}
                 </div>
             </div>
