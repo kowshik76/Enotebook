@@ -2,21 +2,27 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Notesitem } from './Notesitem';
 import { Addnote } from './Addnote';
 import NoteContext from '../context/notes/NoteContext';
-
+import { useNavigate } from 'react-router-dom';
 
 
 export const Notes = (props) => {
+    const navigate = useNavigate();
     const [note, setnote] = useState({ id: "", etitle: "", edescription: "", etag: "" });
 
     const context = useContext(NoteContext);
 
     const { notes, getallnotes, editnote } = context;
     useEffect(() => {
-        getallnotes()
-    }, [getallnotes])
-    const ref = useRef(null)
-    const refclose = useRef(null)
+        const token = localStorage.getItem('token');
+        if (!token) {
+            navigate('/login'); // Redirect if token is missing
+        } else {
+            getallnotes();
+        }
+    }, [navigate, getallnotes]);
 
+    const ref = useRef(null);
+    const refclose = useRef(null);
 
     const updateNote = (currentNote) => {
         ref.current.click();
@@ -28,18 +34,14 @@ export const Notes = (props) => {
         });
     };
 
-
-
     const handleclick = () => {
         if (note.etitle.trim() === "" || note.edescription.trim() === "") {
             return;
         }
         editnote(note.id, note.etitle, note.edescription, note.etag);
         props.ShowAlert("Note Updated successfully!", "success");
-
         refclose.current.click();
     };
-
 
     const onChange = (e) => {
         setnote({ ...note, [e.target.name]: e.target.value });
@@ -53,7 +55,6 @@ export const Notes = (props) => {
                 example
             </button>
 
-
             <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">
@@ -63,7 +64,6 @@ export const Notes = (props) => {
                         </div>
                         <div className="modal-body">
                             <div>
-
                                 <div className="mb-3">
                                     <label htmlFor="title" className="form-label">Title</label>
                                     <input type="text" className="form-control" id="etitle" name="etitle" placeholder="Type Something" value={note.etitle} onChange={onChange} />
@@ -71,11 +71,9 @@ export const Notes = (props) => {
                                 <div className="mb-3">
                                     <label htmlFor="description" className="form-label">Description</label>
                                     <textarea className="form-control" id="edescription" name="edescription" rows="3" value={note.edescription} onChange={onChange}></textarea>
-
                                     <div className="mb-3">
                                         <label htmlFor="tag" className="form-label">Tag</label>
                                         <textarea className="form-control" id="etag" name="etag" placeholder="Type Something" rows="1" value={note.etag} onChange={onChange}></textarea>
-
                                     </div>
                                 </div>
                             </div>
@@ -92,7 +90,6 @@ export const Notes = (props) => {
                     <h3>Your Notes</h3>
                     <div className="container">
                         {notes.length === 0 && 'No Notes To Display!!'}
-
                     </div>
                     {notes.map((note) => {
                         return <Notesitem key={note._id} note={note} updateNote={updateNote} ShowAlert={props.ShowAlert} />;
@@ -100,5 +97,5 @@ export const Notes = (props) => {
                 </div>
             </div>
         </>
-    )
+    );
 }

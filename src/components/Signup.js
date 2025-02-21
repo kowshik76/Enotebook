@@ -31,7 +31,9 @@ export const Signup = (props) => {
         setcredentials({ ...credentials, [e.target.name]: e.target.value })
     }
     return (
-        <div className='container my-4'>
+        <div className='container my-5'>
+            <h2>Create Account in EnoteBook</h2><br></br>
+
             <form onSubmit={handlesubmit}>
                 <div className="md-4">
                     <label htmlFor="name" className="form-label"> Name</label>

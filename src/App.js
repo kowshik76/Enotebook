@@ -12,6 +12,7 @@ import Alert from './components/Alert';
 import { Signup } from './components/Signup';
 import { Login } from './components/Login';
 import { useState } from 'react';
+import Enotebook from './components/Enotebook';
 function App() {
   const [alert, setAlert] = useState(null);
   const ShowAlert = (message, type) => {
@@ -33,6 +34,11 @@ function App() {
 
           <div className="container">
             <Routes>
+              <Route
+                exact
+                path="/enotebook"
+                element={<Enotebook ShowAlert={ShowAlert} />}
+              />
               <Route
                 exact
                 path="/home"

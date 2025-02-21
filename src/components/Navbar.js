@@ -1,6 +1,12 @@
 import React, { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 const Navbar = () => {
+    let navigate = useNavigate();
+    const Logout = () => {
+        localStorage.removeItem('token');
+        navigate('/login');
+    }
     let location = useLocation();
     useEffect(() => {
 
@@ -10,7 +16,7 @@ const Navbar = () => {
 
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
-                <Link className="navbar-brand" to="/">Enotebook</Link>
+                <Link className="navbar-brand" to="/enotebook">Enotebook</Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -25,11 +31,11 @@ const Navbar = () => {
 
 
                     </ul>
-                    <form className="d-flex" role="search">
+                    {!localStorage.getItem('token') ? <form className="d-flex" role="search">
                         <Link className="btn btn-primary mx-2" to="/login" role="button">Login</Link>
                         <Link className="btn btn-primary mx-2" to="/signup" role="button">Signup</Link>
 
-                    </form>
+                    </form> : <button className="btn btn-primary" onClick={Logout}>Log Out</button>}
                 </div>
             </div>
         </nav>
