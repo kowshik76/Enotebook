@@ -32,7 +32,11 @@ export const Login = (props) => {
 
     return (
         <div className='container my-5'>
-            <h2>Login to EnoteBook</h2><br></br>
+
+            <div className="container">
+                <h1> Login to <span>EnoteBook</span></h1>
+
+            </div>
             <form onSubmit={handlesubmit}>
                 <div className="mb-3">
                     <label htmlFor="mail" className="form-label">Email</label>
@@ -44,6 +48,7 @@ export const Login = (props) => {
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
+
         </div>
     );
 };

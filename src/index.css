@@ -1,17 +1,129 @@
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 i {
   cursor: pointer;
+}
+
+.about {
+  margin-top: 20px;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid black;
+  border-radius: 20px;
+  box-shadow: 5px 10px;
+  transition: ease-in-out background-color 15s;
+}
+
+.about:hover {
+  border: 4px solid rgb(169, 66, 66);
+  box-shadow: 8px 15px;
+  background-color: brown;
+}
+
+.main {
+  margin-top: 30px;
+  border: 2px solid black;
+  border-radius: 7px;
+}
+
+span {
+  color: rgb(41, 41, 172);
+}
+
+.main2 {
+  margin-top: 30px;
+  padding: 10px;
+  border: 2px solid black;
+  border-radius: 7px;
+}
+
+.container2 {
+  margin-top: 10px;
+  padding: 7px;
+}
+
+.container3 {
+  margin-top: 20px;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  height: 200px;
+  width: 650px;
+}
+
+.logo-container {
+  width: 120px;
+  height: 120px;
+  background-color: black;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 1.5s ease-in-out;
+  position: absolute;
+}
+
+.logo {
+  width: 70px;
+  height: 70px;
+}
+
+.move-left {
+  transform: translateX(-25vw);
+}
+
+.container {
+  margin-bottom: 30px;
+}
+
+.container4 {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.animated-text {
+  font-size: 2.36rem;
+  font-weight: bold;
+  color: black;
+  position: absolute;
+  opacity: 0;
+  animation: fadeIn 1.5s ease-in-out 1.2s forwards, typing 2s steps(25) 1.5s forwards;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid black;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 340px;
+  }
+}
+
+.motion {
+  margin-left: 200px
 }

@@ -32,7 +32,10 @@ export const Signup = (props) => {
     }
     return (
         <div className='container my-5'>
-            <h2>Create Account in EnoteBook</h2><br></br>
+            <div className="container">
+                <h1>Signup to <span>EnoteBook</span></h1>
+
+            </div>
 
             <form onSubmit={handlesubmit}>
                 <div className="md-4">
