@@ -22,7 +22,6 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/notes', require('./routes/notes'));
 
 // Serve React app in production
-const path = require('path');
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../build')));
