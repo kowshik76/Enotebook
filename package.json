@@ -11,8 +11,8 @@
     "express": "^4.21.2",
     "framer-motion": "^12.4.7",
     "lucide-react": "^0.476.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-router-dom": "^7.1.5",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
