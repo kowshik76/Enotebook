@@ -5,9 +5,12 @@ export const Login = (props) => {
     const [credentials, setcredentials] = useState({ mail: "", password: "" });
     let navigate = useNavigate();
 
+    // Set the API URL based on the environment
+    const host = process.env.NODE_ENV === 'production' ? 'https://your-render-url.onrender.com' : 'http://localhost:3000';
+
     const handlesubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch('http://localhost:3000/api/auth/login', {
+        const response = await fetch(`${host}/api/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -32,10 +35,8 @@ export const Login = (props) => {
 
     return (
         <div className='container my-5'>
-
             <div className="container">
                 <h1> Login to <span>EnoteBook</span></h1>
-
             </div>
             <form onSubmit={handlesubmit}>
                 <div className="mb-3">
@@ -48,7 +49,6 @@ export const Login = (props) => {
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
-
         </div>
     );
 };
