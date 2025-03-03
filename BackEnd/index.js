@@ -1,20 +1,43 @@
 const connectTomongo = require('./db');
+const express = require('express');
+const cors = require('cors');
+const path = require('path'); // For serving React build files
+const dotenv = require('dotenv');
 
+// Load environment variables
+dotenv.config();
 
-const express = require('express')
-var cors = require('cors')
+// Connect to MongoDB
 connectTomongo();
-const app = express()
-const port = 3000
+
+const app = express();
+const port = process.env.PORT || 3000;
+
+// Middleware
 app.use(cors());
-app.use(express.json())
-app.use('/api/auth', require('./routes/auth'))
-app.use('/api/notes', require('./routes/notes'))
+app.use(express.json());
 
+// Routes
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/notes', require('./routes/notes'));
+
+// Serve React app in production
+if (process.env.NODE_ENV === 'production') {
+    // Serve static files from the React build folder
+    app.use(express.static(path.join(__dirname, '../../build')));
+
+    // Handle client-side routing
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, '../../build/index.html'));
+    });
+}
+
+// Default route
 app.get('/', (req, res) => {
-    res.send('Hey World!')
-})
+    res.send('Hey World!');
+});
 
+// Start server
 app.listen(port, () => {
-    console.log(` App listening on port ${port}`)
-})
+    console.log(`App listening on port ${port}`);
+});
