@@ -1,7 +1,7 @@
-const connectTomongo = require('./db');
 const express = require('express');
+const path = require('path');
+const connectTomongo = require('./db');
 const cors = require('cors');
-const path = require('path'); // For serving React build files
 const dotenv = require('dotenv');
 
 // Load environment variables
@@ -13,8 +13,13 @@ connectTomongo();
 const app = express();
 const port = process.env.PORT || 3000;
 
+// CORS configuration
+app.use(cors({
+    origin: 'https://enotebook-uor5.onrender.com', // Allow requests from your frontend domain
+    credentials: true, // Allow cookies and credentials
+}));
+
 // Middleware
-app.use(cors());
 app.use(express.json());
 
 // Routes
@@ -22,7 +27,6 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/notes', require('./routes/notes'));
 
 // Serve React app in production
-
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../build')));
     app.get('*', (req, res) => {
