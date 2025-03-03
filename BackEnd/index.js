@@ -16,8 +16,12 @@ const port = process.env.PORT || 3000;
 // CORS configuration
 app.use(cors({
     origin: 'https://enotebook-uor5.onrender.com', // Allow requests from your frontend domain
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods
     credentials: true, // Allow cookies and credentials
 }));
+
+// Handle preflight requests
+app.options('*', cors()); // Enable preflight for all routes
 
 // Middleware
 app.use(express.json());
