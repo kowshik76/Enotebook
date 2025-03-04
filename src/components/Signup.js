@@ -1,49 +1,47 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const Signup = (props) => {
-
-    const [credentials, setcredentials] = useState({ name: "", mail: "", password: "", cpassword: "" })
+    const [credentials, setcredentials] = useState({ name: "", mail: "", password: "", cpassword: "" });
     let navigate = useNavigate();
+
+    // Set the API URL based on the environment
+    const host = process.env.NODE_ENV === 'production' ? 'https://enotebook-uor5.onrender.com' : 'http://localhost:3000';
+
     const handlesubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch(`http://localhost:3000/api/auth/createuser`, {
+        const response = await fetch(`${host}/api/auth/createuser`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ name: credentials.name, mail: credentials.mail, password: credentials.password })
+            body: JSON.stringify({ name: credentials.name, mail: credentials.mail, password: credentials.password }),
         });
+
         const json = await response.json();
-
-        console.log(json);
         if (json.success) {
+            // Save the auth token and redirect
             localStorage.setItem('token', json.authToken);
-            navigate("/home");
+            navigate('/home');
             props.ShowAlert("Account Created successfully!", "success");
-
         } else {
             props.ShowAlert("Invalid Details", "danger");
-
         }
-    }
+    };
+
     const onChange = (e) => {
-        setcredentials({ ...credentials, [e.target.name]: e.target.value })
-    }
+        setcredentials({ ...credentials, [e.target.name]: e.target.value });
+    };
+
     return (
         <div className='container my-5'>
             <div className="container">
                 <h1>Signup to <span>EnoteBook</span></h1>
-
             </div>
-
             <form onSubmit={handlesubmit}>
                 <div className="md-4">
                     <label htmlFor="name" className="form-label"> Name</label>
                     <input type="text" className="form-control" id="name" onChange={onChange} name='name' required />
-                    <div className="valid-feedback">
-
-                    </div>
                 </div>
                 <div className="mb-3">
                     <label htmlFor="mail" className="form-label">Email address</label>
@@ -57,9 +55,8 @@ export const Signup = (props) => {
                     <label htmlFor="cpassword" className="form-label">Confirm Password</label>
                     <input type="password" className="form-control" id="cpassword" onChange={onChange} name='cpassword' minLength={5} required />
                 </div>
-
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
         </div>
-    )
-}
+    );
+};

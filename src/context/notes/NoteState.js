@@ -13,7 +13,7 @@ const NoteState = (props) => {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'auth-token': authToken,
+                    'Authorization': `Bearer ${authToken}`,
                 },
             });
 
@@ -36,7 +36,7 @@ const NoteState = (props) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'auth-token': authToken,
+                'Authorization': `Bearer ${authToken}`,
             },
             body: JSON.stringify({ title, description, tag }),
         });
@@ -51,7 +51,7 @@ const NoteState = (props) => {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
-                'auth-token': authToken,
+                'Authorization': `Bearer ${authToken}`,
             },
         });
 
@@ -64,7 +64,7 @@ const NoteState = (props) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'auth-token': authToken,
+                'Authorization': `Bearer ${authToken}`,
             },
             body: JSON.stringify({ title, description, tag }),
         });

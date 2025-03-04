@@ -6,16 +6,16 @@ export const Login = (props) => {
     let navigate = useNavigate();
 
     // Set the API URL based on the environment
-    const host = process.env.NODE_ENV === 'production' ? 'https://your-render-url.onrender.com' : 'http://localhost:3000';
+    const host = process.env.NODE_ENV === 'production' ? 'https://enotebook-uor5.onrender.com' : 'http://localhost:3000';
 
     const handlesubmit = async (e) => {
         e.preventDefault();
         const response = await fetch(`${host}/api/auth/login`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ mail: credentials.mail, password: credentials.password })
+            body: JSON.stringify({ mail: credentials.mail, password: credentials.password }),
         });
 
         const json = await response.json();

@@ -37,7 +37,8 @@ router.post('/addnote', fetchuser, [
         return res.status(500).json({ error: "Internal Server Error" });
     }
 });
-// ✅ updating a  note (POST request) - Requires authentication
+
+// ✅ Updating a note (POST request) - Requires authentication
 router.post('/updatenote/:id', fetchuser, async (req, res) => {
     try {
         const { title, description, tag } = req.body;
@@ -71,10 +72,9 @@ router.post('/updatenote/:id', fetchuser, async (req, res) => {
     }
 });
 
-// ✅ Deleting a  note (DELETE request) - Requires authentication
+// ✅ Deleting a note (DELETE request) - Requires authentication
 router.delete('/deletenote/:id', fetchuser, async (req, res) => {
     try {
-
         // ✅ Find the existing note by ID
         let note = await Notes.findById(req.params.id);
         if (!note) {
@@ -86,14 +86,14 @@ router.delete('/deletenote/:id', fetchuser, async (req, res) => {
             return res.status(401).json({ error: "Not authorized to update this note" });
         }
 
-        // ✅ Update the note
+        // ✅ Delete the note
         note = await Notes.findByIdAndDelete(req.params.id);
 
         // ✅ Send success response
         res.status(200).json({ message: "Note Deleted successfully", note: note });
 
     } catch (error) {
-        console.error("Error updating note:", error.message);
+        console.error("Error deleting note:", error.message);
         res.status(500).json({ error: "Internal Server Error" });
     }
 });

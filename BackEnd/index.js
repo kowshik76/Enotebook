@@ -18,6 +18,7 @@ app.use(cors({
     origin: 'https://enotebook-uor5.onrender.com', // Allow requests from your frontend domain
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods
     credentials: true, // Allow cookies and credentials
+    allowedHeaders: ['Content-Type', 'Authorization'], // Allow specific headers
 }));
 
 // Handle preflight requests
@@ -34,7 +35,7 @@ app.use('/api/notes', require('./routes/notes'));
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../build')));
     app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, '../build/index.html')); // Fixed: Removed extra parenthesis
+        res.sendFile(path.join(__dirname, '../build/index.html'));
     });
 }
 
