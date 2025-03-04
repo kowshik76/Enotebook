@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import NoteContext from './NoteContext';
 
 const NoteState = (props) => {
-    const host = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3000';
+    const host = process.env.NODE_ENV === 'production' ? 'https://enotebook-uor5.onrender.com' : 'http://localhost:3000';
     const authToken = localStorage.getItem('token');
     const [notes, setNotes] = useState([]);
 
